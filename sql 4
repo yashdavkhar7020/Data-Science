@@ -1,0 +1,112 @@
+use classicmodels;
+show tables;
+select * from payments;
+select  min(amount) from payments where customerNumber >= 299;
+select  max(amount) from payments where customerNumber >= 299;
+select * from orders;
+select  min(buyPrice) from products;
+select min(customerNumber) from orders where status = 'In Process';
+select customerNumber from orders where status = 'In Process';
+select max(customerNumber) from orders where status = 'Disputed';
+select max(customerNumber) from orders where status = 'In Process';
+select avg(customerNumber) from orders where status = 'In Process';
+select count(customerNumber) from orders where status = 'In Process';
+select sum(customerNumber) from orders where status = 'In Process';
+select * from payments;
+select count(amount) from payments where amount > 6066.78;
+select avg(amount) from payments where amount > 6066.78;
+select sum(amount) from payments where amount > 6066.78;
+select * from offices;
+select distinct country from offices;
+select count(distinct country) from offices;
+select * from payments order by amount desc;
+
+select * from customers;
+select * from customers where city = 'london' and customerNumber > 200;
+select * from customers where city = 'london' or customerNumber > 200;
+
+select customerNumber from customers where not city = 'london' and not state = 'ca' ;
+select * from employees;
+select * from employees where lastName like 'h%';
+select * from employees where lastName like 'p%_';
+select * from customers;
+//select <col1> , aggregate function <col2> from <table name> where condition group by <col>;
+
+select  count(customerNumber) from customers group by country ; 
+select count(customerName) from customers where customerName like '%a%' group by city order by count(customerName) asc;
+select * from payments;
+select min(amount) from payments where amount<30000 group by paymentDate;
+select * from employees;
+select count(customerNumber) from orders where status = 'In process' group by orderNumber;
+select count(employeeNumber) from employees where jobTitle = 'Sales Rep' group by officeCode;
+
+// select <col names> from table name where condition group by <column names> having conditions;
+select count(firstName) from employees where officeCode > 1 group by officeCode having count(firstName) like 'm%' ;
+select sum(amount) from payments group by customerNumber having sum(amount) > 3000;
+
+
+create database joins;
+use joins;
+create table student(roll_no int primary key , name varchar(300) not null , addr varchar(300) , phone int not null , age int);
+create table student_course(course_id int , roll_no int references student(roll_no));
+
+select * from student inner join student_course on student.roll_no = student_course.roll_no;
+select * from student left join student_course on student.roll_no = student_course.roll_no;
+select * from student right join student_course on student.roll_no = student_course.roll_no;
+select student.name,student_course.course_id from student full join student_course on student.roll_no = student_course.roll_no;
+select * from student cross join student_course;
+select * from student_course cross join student;
+
+SELECT a.roll_no, a.name, a.addr, a.phone, a.age, b.course_id
+FROM student a
+LEFT JOIN student_course b ON a.roll_no = b.roll_no
+UNION
+SELECT a.roll_no, a.name, a.addr, a.phone, a.age, b.course_id
+FROM student a
+RIGHT JOIN student_course b ON a.roll_no = b.roll_no;
+
+--------------------select <columns> from <table 1> inner join <table2> on <table1.>  column = <table2.>  column-----------------------
+
+insert into student values(1 ,'harsh' , 'delhi' , 111111111 , 18);
+insert into student values(2 ,'pratik' , 'bihar' , 2222 , 19);
+insert into student values(3 ,'riya' , 'siliguri' , 3333 , 20);
+insert into student values(4 ,'deep' , 'ramnagar' , 44444 , 18);
+insert into student values(5 ,'shri' , 'kolkata' , 555555 , 19);
+insert into student values(6 ,'raj' , 'barbajar' , 6666666 , 20);
+insert into student values(7 ,'rohit' , 'balurghat' , 777777 , 18);
+insert into student values(15 ,'niraj' , 'alipur' , 8888888 , 19);
+insert into student values(16 ,'niraj' , 'alipur' , 8888888 , 19);
+insert into student values(18 ,'niraj' , 'alipur' , 8888888 , 19);
+insert into student values(20 ,'niraj' , 'alipur' , 8888888 , 19);
+
+select * from student_course;
+insert into student_course values(1 , 1 );
+insert into student_course values(2 , 2 );
+insert into student_course values(2 , 3 );
+insert into student_course values(3 , 4 );
+insert into student_course values(1 , 5 );
+insert into student_course values(4 , 6 );
+insert into student_course values(5 , 7 );
+insert into student_course values(4 , 8 );
+insert into student_course values(4 , 9 );
+insert into student_course values(4 , 10);
+insert into student_course values(4 , 11);
+insert into student_course values(4 , 12 );
+
+drop database joins;
+select roll_no as prn from student;
+create table employee(emp_id int primary key,emp_name varchar(99),manager_id int,foreign key (manager_id) references employee(emp_id));
+Insert into employee values(1,'siri',Null);
+Insert into employee values(2,'JAne',1);
+Insert into employee values(3,'Yash',2);
+Insert into employee  values(4,'sam',1);
+Insert into employee values(5,'gaurav',3);
+
+select * from employee;
+
+select e1.emp_id as emp_id,
+       e1.emp_name as emp_name,
+       e2.emp_name as manager_name
+from employee e1
+Inner join employee e2 on e1.manager_id = e2.emp_id;
+
