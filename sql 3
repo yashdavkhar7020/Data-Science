@@ -1,0 +1,48 @@
+use yashdb;
+create table student(rollno int primary key , name varchar (255), age int , class int , address varchar (300));
+create table learning(id int primary key, name varchar (255), state varchar (300));
+alter table student modify class varchar(255);
+create table topics(id int primary key , topic_name varchar (255), learn_id int , foreign key (learn_id) references learning(id) );
+
+insert into student values(1 , 'yash' ,20 , 2 , 'bajrang chowk');
+insert into student values(2 , 'abc' ,22 , 1 , 'bajrang ');
+insert into student values(3 , 'def' ,19 , 2 , 'chowk');
+insert into student values(4 , 'pqr' ,18 , 4 , 'baj chowk');
+insert into student values(5 , 'xyz' ,23 , 3 , 'rang chowk');
+
+select * from student;
+update student  set address = 'jalan nagar' where rollno = 2; 
+insert into student (rollno , name ) value(6,'yash');
+update student set age = 18 , class = 2 , address = 'cidco' where rollno = 6;
+
+grant select on student to 'user1';
+grant insert , update on student to 'user1';
+
+revoke insert on student from 'user1';
+
+
+create table thane( case_no int primary key , criminal_name varchar(300) , case_name varchar (255) , section_no int , case_status varchar(300) , punishment varchar (300)); 
+drop table thane;
+insert into thane values( 1 ,  'anmol shinde' , 'dakaiti' , 440 , 'closed' , 'fashi' );
+
+select * from thane;
+grant select on student to 'user1';
+grant insert , update , create on student to 'user1';
+grant delete on student to 'user1';
+grant insert , update , create on yashdb to 'user1';
+GRANT CREATE, INSERT, UPDATE ON yashdb.* TO 'user1'@'localhost';
+FLUSH PRIVILEGES;
+
+-----tcl------------------start transaction----------commit----rollback------savepoint-----
+start transaction;
+create table dog (sr int primary key , breed varchar(255) , colour varchar (300) , height varchar (255));
+insert into dog values(1, 'lab', 'soneri' , '3.4');
+select * from dog;
+rollback;
+commit;
+insert into dog values(2, 'lab', 'soneri' , '3.4');
+savepoint s1;
+insert into dog values(3, 'lab', 'soneri' , '3.4');
+savepoint s2;
+delete from dog where sr = 1;
+rollback to s2;
