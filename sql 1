@@ -1,0 +1,64 @@
+create database college;
+create database xyz;
+create database if not exists college;
+drop database temp1;
+drop database sakila;
+drop database world;
+show databases;
+
+use college;
+show columns from student;
+
+
+create table student(
+	id int primary key,
+    name varchar(50),
+    age int not null
+);
+
+insert into student (id , name , age) values(1, "aman", 26);
+insert into student (id , name , age) values(2, "aman", 26);
+
+select * from student;
+
+use xyz;
+
+create table employee(
+	id int primary key,
+    name varchar(50),
+    salary int not null
+);
+
+create table employee1(
+	id int ,
+    name varchar(50),
+    salary int not null,
+    primary key (id, name)
+    
+);
+
+insert into employee (id , name , salary) values(1, "aman", 26);
+insert into employee (id , name , salary) values(2, "aman", 26);
+
+select * from employee;
+create table emp(
+	id int,
+    name varchar(50),
+    salary int default 20000);
+    
+insert into emp (id , name , salary) values(1, "aman", 2600);
+insert into emp (id , name , salary) values(2, "aman", 2800);
+insert into emp (id , name , salary) values(3, "aman", 2900);
+insert into emp (id , name , salary) values(4, "aman", 2500);
+ 
+select * from emp;
+select avg(salary)from emp;
+select max(salary)from emp;
+
+use demo;
+create table customer(sr int primary key , name varchar(30) not null,customerid int not null,pin_code int,city varchar(30),phone_no int not null);
+insert into customer values(1 , 'yash', 120 , 431001 , 'aurangabad', 702);
+insert into customer values(2 , 'yash', 120 , 431001 , 'aurangabad', 702);
+select * from customer;
+desc customer;
+drop table customer;
