@@ -1,0 +1,71 @@
+create database university;
+use university;
+
+create table student(
+	rollno int primary key,
+    name varchar(50),
+    marks int not null,
+    grade varchar(1),
+    city varchar(20)
+);
+create table student1(
+	rollno int primary key,
+    name varchar(50),
+    marks int not null,
+    grade varchar(1),
+    city varchar(20)
+);
+
+insert into student(rollno , name , marks , grade, city) 
+values
+(101, "anil", 78, "c", "pune"),
+(102, "yash", 78, "c", "pune"),
+(103, "siri", 81, "c", "pune"),
+(104, "om", 78, "c", "pune"),
+(105, "sam", 78, "c", "pune"),
+(106, "aduu", 78, "c", "pune");
+insert into student1(rollno , name , marks , grade, city) 
+values
+(101, "anil", 50, "c", "pune"),
+(102, "yash", 78, "c", "pune"),
+(103, "siri", 90, "c", "pune"),
+(104, "om", 99, "c", "pune"),
+(105, "sam", 88, "c", "pune"),
+(106, "aduu", 88, "c", "pune");
+
+select * from student;
+select  distinct city , marks , name  from student;
+select * from student where marks >70 and city = "pune";
+select * from student1 where marks between 90 and 100 and city = "pune";
+select * from student1 limit 3;
+select * from student1 order by marks asc;
+select avg( marks)from student1;
+select max( marks)from student1;
+select city,name, count(rollno) from student group by city,name;
+select name, avg(marks) from student group by name order by  avg(marks) desc; 
+
+
+show databases;
+use sys;
+use yashdb;
+select * from students;
+create database demo;
+use demo;
+show databases;
+
+use demo;
+create table customer(sr int primary key , name varchar(30) not null,customerid int not null,pin_code int,city varchar(30),phone_no int not null);
+insert into customer values(1 , 'yash', 120 , 431001 , 'aurangabad', 702);
+insert into customer values(2 , 'yash', 120 , 431001 , 'aurangabad', 702);
+insert into customer values(3 , 'yash', 120 , 431001 , 'aurangabad', 702 , 'yashdavkhar10@gmail.com');
+insert into customer values(4 , 'yash', 120 , 431001 , 'aurangabad', 702 , 'yashdavkhar10@gmail.com', 'siri@gmail.com');
+insert into customer values(5, 'yash', 120 , 431001 , 'aurangabad', 7020127553 , 'yashdavkhar10@gmail.com');
+select * from customers;
+desc customer;
+drop table customer;
+alter table customer  add email varchar(300);
+alter table customer add email2 varchar(300) after phone_no;
+alter table customer drop email2;
+alter table customer modify phone_no varchar(300);
+rename table customer to customers;
+alter table customers rename column phone_no to pno;
