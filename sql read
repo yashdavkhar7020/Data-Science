@@ -1,0 +1,262 @@
+# the drop table command is used to delete an existing table from the database the command removes the table definition and all of its data indexes and constraint 
+
+//syntax
+
+drop table <table name>;
+
+
+# drop database - is used to delete an existing database and all of its objects such as tables this command removes the database definition and all of its contents 
+
+//syntax 
+ 
+drop database < database name >; 
+
+# not null constraint is used to ensure that a column cannot have a null value it is a constraint that can be applied to a column when creating or altering a table this constraint enforces that a value must be provided for that column whenever a new record is inserted into the table or and existing record is updated 
+
+//syntax
+
+create table stud ( col1 int not null, col2 varchar not null);
+
+# alter command is used to modify an existing database object such as a table index or column it allows u to add , delete , or modify columns in a table as well as change the data type of a column rename columns or tables , and or drop constraints 
+
+1. adding a column - u can use the alter table statement to add a new column in an existing table u can use the alter table statement to add an new column to an existing table 
+
+//syntax 
+alter table stud add <column name int>;
+
+2. dropping a column -  u can remove an existing column from the table 
+
+//syntax
+alter table stud drop <column name>;
+
+3. modifying a column - u can change the data type size or constraints of an existing column 
+
+//syntax
+alter table stud modify <col1 new data type>;
+
+4. rename command allows u to change the name of an existing database object such as a table or a column the specific syntax for renaming objects can vary between diff database management       systems 
+
+//syntax rename table
+rename table stud to <new table name>;
+
+//syntax rename column
+alter table stud rename column <col1> to <col2>;
+
+5. truncate is a command used to quickly delete all rows from a table effectively resetting the table to its initial state without actually dropping and re creating the table structure 
+
+//syntax
+truncate table stud;
+
+# assignment create 2 tables student and learning
+fields student : roll no , name , age ,class , address
+fields learning : id , name , state
+
+
+*****************dml*************************
+
+1. insert- the insert into statement is used to insert new records in a table syntax insert into table name (col 1, col 2) values (value 1, value2, value 3);
+
+2. update- this command is used to update existing rows in a table 
+//syntax
+update stud set col1 = values, col2 = value2 where condition;
+
+3. delete -  the delete statement is used to delete existing records in a table delete from table name where condition 
+
+#diff between drop , truncate , delete
+ 
+*************delete************************************** 
+delete is a dml command
+delete is used to delete the records in the table 
+delete statement use the where claw to delete the particular records 
+statement can be rollback before the commit 
+delete is slower as compared to truncate
+//syntax
+delete from <table name>
+ 
+          
+
+*************truncate************************************* 
+is a ddl command 
+is used to delete the data and keep the table structure as it is
+truncate cant use where claws to delete particular data
+truncate statement cant rollback
+its faster
+//syntax
+truncate table <table name>   
+
+
+************drop**************************************** 
+is a ddl command 
+drop cant use where claws
+drop statement cant rollback
+is used to drop the table data as well as the table structure 
+drop removes the table from the database we can also drop columns
+//syntax
+drop table <table name>
+
+
+*********************************DCL***************************************
+
+
+DCL helps user to retrieve and modify the data stored in the database with some specified queries grant and revoke belong to this type of commands of the data controlling language 
+
+1 . grant - this command is specifically used to provide privileges to data base objects for a user this command also allows users to grant permissions to other users to 
+// grant privilege name on object name to user name; 
+	
+	# privilege name is in which permission has to be granted 
+	# object name is the name of database object 
+	# user name is the user to which access should be provided
+
+2 . revoke - this command withdraw user privileges on database objects if any granted it does operations opposite to the grant command when a privilege is revoked from the particular user u then the privileges granted to all other users by user u will be revoked
+//revoke privilege name on object name from user name; 
+
+
+grant 
+1. this dcl command grants permissions to the user n the database objects 
+2. it assigns access rights to users 
+3. for each user u need to specify the permissions 
+4. when the access is de centralized granting permissions will be easy 
+revoke 
+1.this dcl command removes permissions if any granted to the users 
+2 it revokes the user access rights of users 
+3. if CCESS FOR ONE USER IS REMOVED  all the particular permissions provided by that user to others will be removed 4
+4. if de centralized access removing the granted permissions is difficult
+
+privileges
+that can be granted to the users are listed as follow
+1. select 
+2. insert
+3. delete
+4. index
+5. create
+6.alter
+7. drop
+8. all
+9. grant
+10. update
+
+
+
+***********************tcl**************************
+
+tcl are used to manage transactions in a database 
+
+transactions are sequences of sql operations that are executed as a single unit of work 
+
+tcl commands ensure that this operations are completed successfully and committed to the database or rollback in case of errors 
+
+1. commit - commits the current transaction making all changes permanent 
+//syntax 
+commit; 
+
+2. rollback - rollback current transaction undoing all changes made in the transaction 
+//syntax
+rollback;
+
+3. save point - sets a save point within the current transaction allowing you to rollback to this point if needed
+// save point <save point name> ;
+
+practicle applications 
+
+banking systems 
+transferring money from one to another requires both the debit and credit operations to succeed if one fails transaction is rolled back
+
+order processing
+in ecommerce placing an order involves multiple operations like inventory update , payment processing , and order confirmation this should be treated as a single transaction 
+
+by using tcl command u can ensure data integrity and consistency in your database operations making them crucial for applications requiring reliable transaction management.   
+
+
+###an aggregate function is a function that performs a calculation on a set of values and returns a single value
+
+aggregate functions are often used with the group by clause of the select statement the group by clause splits the result set into groups of values and the aggregate function can be used to return a single value for each group 
+
+the most commonly used aggregate functions are :-
+Min , Max , Count , sum , avg 
+
+1 .min - the min function is used to return the smallest value from a specified column in a table 
+	the function is particularly useful when you want to find the min value in a set of records 
+//select min (cl1 ) from table name where <Cond>;
+
+2 .max - the max function is used to return the largest value from a specified column in a table 
+	this function is useful when u want to find the maximum value in a set of records 
+//select max (cl) from table name where <Cond>;
+
+3. count - is used to count the no rows that match a specified condition this function is very useful for getting the no records in a table or the no records that meet certain criteria
+//select count (cl) from table name where <Cond>;
+
+4. sum - the sum function in sql is used to calculate the total sum of a numeric column 
+	the sum function is powerful tool for performing aggregate calculations in sql allowing u to analyze and summarize data effectively 
+//select sum (cl) from table name where <Cond>;
+
+5. avg - is used to calculate the avg value of a numeric column this function is particularly useful when u want to find the avg value of a set of records
+//select avg(cl) from table name where <Cond>;
+
+*******************************distinct**********************
+
+# distinct - the distinct statement is used to return unique values from column or a combination of columns removing duplicate entries this keyword is particularly useful when u want to 	eliminate duplicate rows from the result set 
+// select distinct cl1,cl2.. from (stud) where condition;
+
+******************************************order by***********************
+
+# order by clause sorts the result of the select statement either in ascending or descending order it is used to sort the fetched data in ascending or descending order to one or more columns 
+it is very usefull to present data in a structured mannar sql order by default mode is sorting data into ascending order to sort data in descending order use the keyword desc with the order by clause 
+//select * from <table name> order by <col name> asc or desc ;
+
+********************and operator*******************************************
+not is used to negate a condition making it true if the condition is false and false if the condition is true the not operator is used in combination with other operators to give the positive results 
+//select <column names> from <table name> where not condition 
+
+% represents 0 or more characters 
+_ represents
+
+***************************join*********************
+
+join operation combines data or rows from to or more tables based on a common field between them join clause is used to query and access data from multiple tables by establishing logic relationships between them it can . 
+join clause can also be paired with other clauses it is mostly used with the where clause to filter data retrieval 
+types :-
+inner join - return records that have matching values in both tables the inner join keyword selects all rows from both the tables as long as the condition is satisfied the keyword will create the result set by combining all rows from both the tables where condition satisfies
+//select <columns> from <table 1> inner join <table2> on <table1.> common column = <table2.> common column.
+ 
+left join
+right join 
+
+full join -the full join returns all records when there is a match in left as well ass in right table.
+ full join creates the result set by combining results of both left and right join the result will contain
+ all the rows from both table for the rows for which there is no matching the result set will contain null values 
+//select <col> from <tab1> full join <tab2> on table1.roll_no = table2.roll_no;
+ 
+cross join- it returns the certation product of two tables this means that it pairs each row from the first table with every row from the second table cross joins can result in 
+very large result sets specially when both tables have a large no of rows 
+// select * from <t1> cross join <t2>;
+
+self join
+
+*************************************aliases ( as )*******************************************
+
+as are used to give table or a column in a table a temporary name this is usefull for making column names more readable for shortning long table names
+, or for renaming columns when they are being used in calculations or as part of a complex query alises are created using the keyword as 
+//select <column name> as alias_name from table_name;
+
+:- alises are often used to make column names more readable it is used to give a table or a column in a table a temprory name 
+:-alises only exist for the duration of that query 
+
+************************************group by**************************************************
+
+1. group by statement is used in conjunction with aggregate functions like count , max , min and average to group the result set by one or more columns this allows us to perform aggregations on specific subsets of data within our table 
+//select <col1> , aggregate function <col2> from <table name> where condition group by <col>;
+
+*************************************having clause*************************************
+
+is used to filter records that works on aggregated results it is similar to where clause but where is used to filter rows before the aggregation 
+and having is used to filter rows after aggregation. it was added because the where keyword cannot be used with aggregate functions 
+// select <col names> from table name where condition group by <column names> having conditions;
+
+1. it is used to filter data according to the conditions provided .
+2. having a clause is generally used in reports of large data.
+3. having clause is only used with the select clause.
+4. in the query,  order by is to be placed after the having clause if any
+5. having clause is implemented in column operations. 
+6. having clause is generally used group by by.
+
+
